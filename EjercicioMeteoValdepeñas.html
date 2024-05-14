@@ -35,7 +35,7 @@
             for (var i = 0; i < dias.length; i++) {
                 var fecha = dias[i].getAttribute("fecha");
                 informacionDiv.innerHTML += "<h3>Fecha: " + fecha + "</h3>";
-                
+                console.log("Fecha:", fecha);
                 // 3. De cada fecha muestra la información requerida
                 var periodos = dias[i].getElementsByTagName("prob_precipitacion");
                 for (var j = 0; j < periodos.length; j++) {
