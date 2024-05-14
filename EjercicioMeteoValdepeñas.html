@@ -3,58 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Información Meteorológica</title>
 </head>
 <body>
+    <div id="informacion"></div>
+
     <script>
-var xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-        procesarXML(this.responseText); 
-    }
-};
-xhttp.open("GET", "./MeteoValdepenas.xml", true);
-xhttp.send();
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                procesarXML(this.responseText); 
+            }
+        };
+        xhttp.open("GET", "./MeteoValdepenas.xml", true);
+        xhttp.send();
 
-
-function procesarXML(xmlString){
-    var parser = new DOMParser();
-    var xmlDoc = parser.parseFromString(xmlString, "text/xml");
-    
-    // 1. Muestra la localidad y provincia de la previsión meteorológica
-    var nombre = xmlDoc.getElementsByTagName("nombre")[0].textContent;
-    var provincia = xmlDoc.getElementsByTagName("provincia")[0].textContent;
-    console.log("Localidad:", nombre);
-    console.log("Provincia:", provincia);
-
-    // 2. Muestra las fechas de cada predicción
-    var dias = xmlDoc.getElementsByTagName("dia");
-    for (var i = 0; i < dias.length; i++) {
-        var fecha = dias[i].getAttribute("fecha");
-        console.log("Fecha:", fecha);
-        
-        // 3. De cada fecha muestra la información requerida
-        var periodos = dias[i].getElementsByTagName("prob_precipitacion");
-        for (var j = 0; j < periodos.length; j++) {
-            var periodo = periodos[j].getAttribute("periodo");
-            var probPrecipitacion = periodos[j].textContent;
-            var estadoCielo = dias[i].getElementsByTagName("estado_cielo")[j].getAttribute("descripcion");
-            var direccionViento = dias[i].getElementsByTagName("viento")[j].getElementsByTagName("direccion")[0].textContent;
-            var velocidadViento = dias[i].getElementsByTagName("viento")[j].getElementsByTagName("velocidad")[0].textContent;
-            var temperaturaMax = dias[i].getElementsByTagName("temperatura")[0].getElementsByTagName("maxima")[0].textContent;
-            var temperaturaMin = dias[i].getElementsByTagName("temperatura")[0].getElementsByTagName("minima")[0].textContent;
+        function procesarXML(xmlString){
+            var parser = new DOMParser();
+            var xmlDoc = parser.parseFromString(xmlString, "text/xml");
             
-            // Mostrar la información de cada periodo
-            console.log("Periodo:", periodo);
-            console.log("Probabilidad de precipitación:", probPrecipitacion);
-            console.log("Estado del cielo:", estadoCielo);
-            console.log("Dirección del viento:", direccionViento);
-            console.log("Velocidad del viento:", velocidadViento);
-            console.log("Temperatura máxima:", temperaturaMax);
-            console.log("Temperatura mínima:", temperaturaMin);
+            var informacionDiv = document.getElementById("informacion");
+
+            // 1. Muestra la localidad y provincia de la previsión meteorológica
+            var nombre = xmlDoc.getElementsByTagName("nombre")[0].textContent;
+            var provincia = xmlDoc.getElementsByTagName("provincia")[0].textContent;
+            informacionDiv.innerHTML += "<h2>Localidad: " + nombre + "</h2>";
+            informacionDiv.innerHTML += "<h2>Provincia: " + provincia + "</h2>";
+
+            // 2. Muestra las fechas de cada predicción
+            var dias = xmlDoc.getElementsByTagName("dia");
+            for (var i = 0; i < dias.length; i++) {
+                var fecha = dias[i].getAttribute("fecha");
+                informacionDiv.innerHTML += "<h3>Fecha: " + fecha + "</h3>";
+                
+                // 3. De cada fecha muestra la información requerida
+                var periodos = dias[i].getElementsByTagName("prob_precipitacion");
+                for (var j = 0; j < periodos.length; j++) {
+                    var periodo = periodos[j].getAttribute("periodo");
+                    var probPrecipitacion = periodos[j].textContent;
+                    var estadoCielo = dias[i].getElementsByTagName("estado_cielo")[j].getAttribute("descripcion");
+                    var direccionViento = dias[i].getElementsByTagName("viento")[j].getElementsByTagName("direccion")[0].textContent;
+                    var velocidadViento = dias[i].getElementsByTagName("viento")[j].getElementsByTagName("velocidad")[0].textContent;
+                    var temperaturaMax = dias[i].getElementsByTagName("temperatura")[0].getElementsByTagName("maxima")[0].textContent;
+                    var temperaturaMin = dias[i].getElementsByTagName("temperatura")[0].getElementsByTagName("minima")[0].textContent;
+                    
+                    // Mostrar la información de cada periodo
+                    var periodoInfo = "<p><strong>Periodo:</strong> " + periodo + "<br>" +
+                                      "<strong>Probabilidad de precipitación:</strong> " + probPrecipitacion + "<br>" +
+                                      "<strong>Estado del cielo:</strong> " + estadoCielo + "<br>" +
+                                      "<strong>Dirección del viento:</strong> " + direccionViento + "<br>" +
+                                      "<strong>Velocidad del viento:</strong> " + velocidadViento + "<br>" +
+                                      "<strong>Temperatura máxima:</strong> " + temperaturaMax + "<br>" +
+                                      "<strong>Temperatura mínima:</strong> " + temperaturaMin + "</p>";
+                    informacionDiv.innerHTML += periodoInfo;
+                }
+            }
         }
-    }
-}
     </script>
 </body>
 </html>
