@@ -15,5 +15,25 @@ xhttp.onreadystatechange = function() {
 };
 xhttp.open("GET", "MeteoValdepenas.xml", true);
 xhttp.send();
+
+function procesarXML(xmlString){
+    var parser = new DOMParser();
+    var xmlDoc = parser.parseFromString(xmlString, "text/xml");
+    
+    // 1. Muestra la localidad y provincia de la previsión meteorológica
+    var nombre = xmlDoc.getElementsByTagName("nombre")[0].textContent;
+    var provincia = xmlDoc.getElementsByTagName("provincia")[0].textContent;
+    console.log("Localidad:", nombre, "Provincia:", provincia);
+
+    // 2. Muestra las fechas de cada predicción
+    var dias = xmlDoc.getElementsByTagName("dia");
+    for (var i = 0; i < dias.length; i++) {
+        var fecha = dias[i].getAttribute("fecha");
+        console.log("Fecha:", fecha);
+
+
+
+    }  
+}
     </script>
 </html>

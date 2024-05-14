@@ -1,15 +1,15 @@
-<?xml version='1.0' encoding='ISO-8859-15'?>
-<root xmlns:xsd="https://www.w3.org/2001/XMLSchema" xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" id="13087" version="1.0" xsi:noNamespaceSchemaLocation="https://www.aemet.es/xsd/localidades.xsd">
+ï»¿<?xml version='1.0' encoding='UTF-8'?>
+<root xmlns:xsd="https://www.w3.org/2001/XMLSchema" xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" id="13087" version="1.0" >
   <origen>
-    <productor>Agencia Estatal de Meteorología - AEMET. Gobierno de España</productor>
+    <productor>Agencia Estatal de MeteorologÃ­a - AEMET. Gobierno de EspaÃ±a</productor>
     <web>https://www.aemet.es</web>
     <enlace>https://www.aemet.es/es/eltiempo/prediccion/municipios/valdepenas-id13087</enlace>
     <language>es</language>
-    <copyright>© AEMET. Autorizado el uso de la información y su reproducción citando a AEMET como autora de la misma.</copyright>
+    <copyright>Â© AEMET. Autorizado el uso de la informaciÃ³n y su reproducciÃ³n citando a AEMET como autora de la misma.</copyright>
     <nota_legal>https://www.aemet.es/es/nota_legal</nota_legal>
   </origen>
   <elaborado>2024-05-14T10:34:07</elaborado>
-  <nombre>Valdepeñas</nombre>
+  <nombre>ValdepeÃ±as</nombre>
   <provincia>Ciudad Real</provincia>
   <prediccion>
     <dia fecha="2024-05-13">
