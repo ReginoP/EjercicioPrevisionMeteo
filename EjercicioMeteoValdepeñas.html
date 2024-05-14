@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,7 @@
 var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-        procesarXML(this.responseText); // Cambiado this por this.responseText
+        procesarXML(this.responseText); 
     }
 };
 xhttp.open("GET", "./MeteoValdepenas.xml", true);
@@ -24,6 +24,8 @@ function procesarXML(xmlString){
     // 1. Muestra la localidad y provincia de la previsión meteorológica
     var nombre = xmlDoc.getElementsByTagName("nombre")[0].textContent;
     var provincia = xmlDoc.getElementsByTagName("provincia")[0].textContent;
+    console.log("Localidad:", nombre);
+    console.log("Provincia:", provincia);
 
     // 2. Muestra las fechas de cada predicción
     var dias = xmlDoc.getElementsByTagName("dia");
@@ -31,8 +33,8 @@ function procesarXML(xmlString){
         var fecha = dias[i].getAttribute("fecha");
         console.log("Fecha:", fecha);
         
-  // 3. De cada fecha muestra la información requerida
-  var periodos = dias[i].getElementsByTagName("prob_precipitacion");
+        // 3. De cada fecha muestra la información requerida
+        var periodos = dias[i].getElementsByTagName("prob_precipitacion");
         for (var j = 0; j < periodos.length; j++) {
             var periodo = periodos[j].getAttribute("periodo");
             var probPrecipitacion = periodos[j].textContent;
@@ -41,11 +43,18 @@ function procesarXML(xmlString){
             var velocidadViento = dias[i].getElementsByTagName("viento")[j].getElementsByTagName("velocidad")[0].textContent;
             var temperaturaMax = dias[i].getElementsByTagName("temperatura")[0].getElementsByTagName("maxima")[0].textContent;
             var temperaturaMin = dias[i].getElementsByTagName("temperatura")[0].getElementsByTagName("minima")[0].textContent;
-           
+            
+            // Mostrar la información de cada periodo
+            console.log("Periodo:", periodo);
+            console.log("Probabilidad de precipitación:", probPrecipitacion);
+            console.log("Estado del cielo:", estadoCielo);
+            console.log("Dirección del viento:", direccionViento);
+            console.log("Velocidad del viento:", velocidadViento);
+            console.log("Temperatura máxima:", temperaturaMax);
+            console.log("Temperatura mínima:", temperaturaMin);
         }
-
-
-    }  
+    }
 }
     </script>
+</body>
 </html>
