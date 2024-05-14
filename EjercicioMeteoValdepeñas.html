@@ -10,7 +10,7 @@
 var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-        myFunction(this);
+        procesarXML(this);
     }
 };
 xhttp.open("GET", "MeteoValdepenas.xml", true);
@@ -23,14 +23,25 @@ function procesarXML(xmlString){
     // 1. Muestra la localidad y provincia de la previsión meteorológica
     var nombre = xmlDoc.getElementsByTagName("nombre")[0].textContent;
     var provincia = xmlDoc.getElementsByTagName("provincia")[0].textContent;
-    console.log("Localidad:", nombre, "Provincia:", provincia);
 
     // 2. Muestra las fechas de cada predicción
     var dias = xmlDoc.getElementsByTagName("dia");
     for (var i = 0; i < dias.length; i++) {
         var fecha = dias[i].getAttribute("fecha");
         console.log("Fecha:", fecha);
-
+        
+  // 3. De cada fecha muestra la información requerida
+  var periodos = dias[i].getElementsByTagName("prob_precipitacion");
+        for (var j = 0; j < periodos.length; j++) {
+            var periodo = periodos[j].getAttribute("periodo");
+            var probPrecipitacion = periodos[j].textContent;
+            var estadoCielo = dias[i].getElementsByTagName("estado_cielo")[j].getAttribute("descripcion");
+            var direccionViento = dias[i].getElementsByTagName("viento")[j].getElementsByTagName("direccion")[0].textContent;
+            var velocidadViento = dias[i].getElementsByTagName("viento")[j].getElementsByTagName("velocidad")[0].textContent;
+            var temperaturaMax = dias[i].getElementsByTagName("temperatura")[0].getElementsByTagName("maxima")[0].textContent;
+            var temperaturaMin = dias[i].getElementsByTagName("temperatura")[0].getElementsByTagName("minima")[0].textContent;
+           
+        }
 
 
     }  
