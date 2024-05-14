@@ -36,7 +36,8 @@
                 var fecha = dias[i].getAttribute("fecha");
                 informacionDiv.innerHTML += "<h3>Fecha: " + fecha + "</h3>";
                 console.log("Fecha:", fecha);
-                // 3. De cada fecha muestra la información requerida
+            
+            // 3. De cada fecha muestra la información requerida
                 var periodos = dias[i].getElementsByTagName("prob_precipitacion");
                 for (var j = 0; j < periodos.length; j++) {
                     var periodo = periodos[j].getAttribute("periodo");
@@ -47,7 +48,7 @@
                     var temperaturaMax = dias[i].getElementsByTagName("temperatura")[0].getElementsByTagName("maxima")[0].textContent;
                     var temperaturaMin = dias[i].getElementsByTagName("temperatura")[0].getElementsByTagName("minima")[0].textContent;
                     
-                    // Mostrar la información de cada periodo
+             // Mostrar la información de cada periodo
                     var periodoInfo = "<p><strong>Periodo:</strong> " + periodo + "<br>" +
                                       "<strong>Probabilidad de precipitación:</strong> " + probPrecipitacion + "<br>" +
                                       "<strong>Estado del cielo:</strong> " + estadoCielo + "<br>" +
